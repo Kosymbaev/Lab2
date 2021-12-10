@@ -140,11 +140,36 @@ public class MainFrame extends JFrame{
         hboxResult.add(textFieldResult);
         hboxResult.add(Box.createHorizontalGlue());
         hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-
+// Создать область для кнопок
         JButton buttonCalc = new JButton("Вычислить");
+        buttonCalc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                try {
 
+                    Double x = Double.parseDouble(textFieldX.getText());
+                    Double y = Double.parseDouble(textFieldY.getText());
+                    Double z = Double.parseDouble(textFieldZ.getText());
+                    if (formulaId==1)
+                        result = calculate1(x, y,z);
+                    else
+                        result = calculate2(x, y,z);
+                    textFieldResult.setText(result.toString());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this,
+                            "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
         JButton buttonReset = new JButton("Очистить поля");
-
+        buttonReset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                textFieldX.setText("0");
+                textFieldY.setText("0");
+                textFieldZ.setText("0");
+                textFieldResult.setText("0");
+            }
+        });
         Box hboxButtons = Box.createHorizontalBox();
         hboxButtons.add(Box.createHorizontalGlue());
         hboxButtons.add(buttonCalc);
@@ -154,9 +179,50 @@ public class MainFrame extends JFrame{
         hboxButtons.setBorder(
                 BorderFactory.createLineBorder(Color.GREEN));
         JButton buttonM = new JButton("M+");
+        buttonM.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-
+                if (PeremId == 1) {
+                    Perem1+=result;
+                    textFieldPerem.setText(Perem1.toString());
+                }
+                else {
+                    if (PeremId ==2){
+                        Perem2+=result;
+                        textFieldPerem.setText(Perem2.toString());
+                    }
+                    else {
+                        if (PeremId ==3){
+                            Perem3+=result;
+                            textFieldPerem.setText(Perem3.toString());
+                        }
+                    }
+                }
+            }
+        });
         JButton buttonMC = new JButton("MC");
+        buttonMC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (PeremId == 1) {
+                    Perem1=0.0;
+                    textFieldPerem.setText(Perem1.toString());
+                }
+                else {
+                    if (PeremId ==2){
+                        Perem2=0.0;
+                        textFieldPerem.setText(Perem2.toString());
+                    }
+                    else {
+                        if (PeremId ==3){
+                            Perem3=0.0;
+                            textFieldPerem.setText(Perem3.toString());
+                        }
+                    }
+                }
+            }
+        });
         Box Mbox = Box.createHorizontalBox();
         Mbox.add(Box.createHorizontalGlue());
         Mbox.add(buttonM);
@@ -165,7 +231,6 @@ public class MainFrame extends JFrame{
         Mbox.add(Box.createHorizontalGlue());
         Mbox.setBorder(
                 BorderFactory.createLineBorder(Color.PINK));
-
         JLabel labelPerem= new JLabel("Значение переменной:");
         textFieldPerem = new JTextField("0",25);
         textFieldPerem.setMaximumSize(textFieldPerem.getPreferredSize());
@@ -186,8 +251,6 @@ public class MainFrame extends JFrame{
         peremType.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 
 
-
-
         Box contentBox = Box.createVerticalBox();
         contentBox.add(Box.createVerticalGlue());
         contentBox.add(hboxFormulaType);
@@ -201,6 +264,7 @@ public class MainFrame extends JFrame{
         contentBox.add(Box.createVerticalGlue());
         getContentPane().add(contentBox, BorderLayout.CENTER);
     }
+    
     // Главный метод класса
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
