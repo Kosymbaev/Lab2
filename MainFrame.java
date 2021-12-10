@@ -140,6 +140,66 @@ public class MainFrame extends JFrame{
         hboxResult.add(textFieldResult);
         hboxResult.add(Box.createHorizontalGlue());
         hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+        JButton buttonCalc = new JButton("Вычислить");
+
+        JButton buttonReset = new JButton("Очистить поля");
+
+        Box hboxButtons = Box.createHorizontalBox();
+        hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.add(buttonCalc);
+        hboxButtons.add(Box.createHorizontalStrut(30));
+        hboxButtons.add(buttonReset);
+        hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.setBorder(
+                BorderFactory.createLineBorder(Color.GREEN));
+        JButton buttonM = new JButton("M+");
+
+
+        JButton buttonMC = new JButton("MC");
+        Box Mbox = Box.createHorizontalBox();
+        Mbox.add(Box.createHorizontalGlue());
+        Mbox.add(buttonM);
+        Mbox.add(Box.createHorizontalStrut(50));
+        Mbox.add(buttonMC);
+        Mbox.add(Box.createHorizontalGlue());
+        Mbox.setBorder(
+                BorderFactory.createLineBorder(Color.PINK));
+
+        JLabel labelPerem= new JLabel("Значение переменной:");
+        textFieldPerem = new JTextField("0",25);
+        textFieldPerem.setMaximumSize(textFieldPerem.getPreferredSize());
+        Box Perem = Box.createHorizontalBox();
+        Perem.add(Box.createHorizontalGlue());
+        Perem.add(labelPerem);
+        Perem.add(Box.createHorizontalStrut(10));
+        Perem.add(textFieldPerem);
+        Perem.add(Box.createHorizontalGlue());
+        Perem.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        peremType.add(Box.createHorizontalGlue());
+        addRadioButton2("Переменная 1:",1);
+        addRadioButton2("Переменная 2:",2);
+        addRadioButton2("Переменная 3:",3);
+        radioButtons2.setSelected(radioButtons2.getElements().nextElement().getModel(), true);
+        peremType.add(Box.createHorizontalGlue());
+        peremType.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+
+
+
+        Box contentBox = Box.createVerticalBox();
+        contentBox.add(Box.createVerticalGlue());
+        contentBox.add(hboxFormulaType);
+        contentBox.add(hboxVariables);
+        contentBox.add(hboxResult);
+        contentBox.add(hboxButtons);
+
+        contentBox.add(Perem);
+        contentBox.add(Mbox);
+        contentBox.add(peremType);
+        contentBox.add(Box.createVerticalGlue());
+        getContentPane().add(contentBox, BorderLayout.CENTER);
     }
     // Главный метод класса
     public static void main(String[] args) {
