@@ -55,6 +55,46 @@ public class MainFrame extends JFrame{
 
         return (1+Math.sqrt(z*x))/(Math.pow(1+Math.pow(x,3),1/y));
     }
+    public void addRadioButton (String buttonName, final int formulaId){
+        JRadioButton button = new JRadioButton(buttonName);
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                MainFrame.this.formulaId=formulaId;
+            }
+        });
+        radioButtons.add(button);
+        hboxFormulaType.add(button);
+    }
+    public void addRadioButton2 (String buttonName, final int PeremId){
+        JRadioButton button = new JRadioButton(buttonName);
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                MainFrame.this.PeremId=PeremId;
+                if (PeremId == 1) {
+                    textFieldPerem.setText(Perem1.toString());
+                }
+                else {
+                    if (PeremId ==2){
+                        textFieldPerem.setText(Perem2.toString());
+                    }
+                    else {
+                        if (PeremId ==3){
+                            textFieldPerem.setText(Perem3.toString());
+                        }
+                    }
+                }
+            }
+        });
+        radioButtons2.add(button);
+        peremType.add(button);
+    }
+    public MainFrame() {
+        
+    }
     // Главный метод класса
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
